@@ -20,42 +20,6 @@
       <div class="row">
         <div class="col-md-12">
           <section id="timebombapp">
-
-            <header id="header">
-              <h1>Bombs</h1>
-            </header>
-
-            <div class="well">
-              <div class="row">
-                <div class="col-md-10 form-group">
-                  <label for="new-bomb-url">URL</label>
-                  <input id="new-bomb-url" class="new-bomb-field form-control" type="text" placeholder="http://example.com">
-                </div>
-
-                <div class="col-md-2 form-group">
-                  <label for="new-bomb-timestamp">Timestamp</label>
-                  <input id="new-bomb-timestamp" class="new-bomb-field form-control" type="text">
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-12 form-group">
-                  <label for="new-bomb-request-params">Request Parameters</label>
-                  <textarea id="new-bomb-request-params" class="new-bomb-field form-control" rows="4"></textarea>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-2 col-md-offset-10">
-                  <button id="new-bomb-submit" type="button" class="btn btn-info btn-block">Submit</button>
-                </div>
-              </div>
-            </div>
-
-            <section id="main">
-              <ul id="bomb-list"></ul>
-            </section>
-
           </section>
         </div>
       </div>
@@ -69,25 +33,82 @@
 </pre>
       </div>
     </script>
+    <script type="text/template" id="bombs-template">
+      <header id="header">
+        <h1>Bombs</h1>
+      </header>
+
+      <div class="well">
+        <div class="row">
+          <div class="col-md-10 form-group">
+            <label for="new-bomb-url" class="control-label">URL</label>
+            <input id="new-bomb-url" class="new-bomb-field form-control" type="text" placeholder="http://example.com">
+          </div>
+
+          <div class="col-md-2 form-group">
+            <label for="new-bomb-timestamp" class="control-label">Timestamp</label>
+            <input id="new-bomb-timestamp" class="new-bomb-field form-control" type="text">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 form-group">
+            <label for="new-bomb-request-params" class="control-label">Request Parameters</label>
+            <textarea id="new-bomb-request-params" class="new-bomb-field form-control" rows="4"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2 col-md-offset-10">
+            <button id="new-bomb-submit" type="button" class="btn btn-info btn-block">Submit</button>
+          </div>
+        </div>
+      </div>
+
+      <section id="main">
+        <ul id="bomb-list"></ul>
+      </section>
+    </script>
     <script type="text/template" id="signin-template">
       <div class="col-md-4 col-md-offset-4">
         <div class="well">
           <h1>Sign In</h1>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input id="email" class="signin-field form-control" type="email" placeholder="user@example.com">
-          </div>
+          <form action="#" id="signin">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input id="email" class="signin-field form-control" type="email" placeholder="user@example.com">
+            </div>
 
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input id="password" class="signin-field form-control" type="password">
-          </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input id="password" class="signin-field form-control" type="password">
+            </div>
 
-          <a href="#" class="btn btn-block btn-info">Sign In</a>
+            <button type="submit" class="btn btn-block btn-info">Sign In</button>
+          </form>
         </div>
       </div>
     </script>
-    <script type="text/template" id="stats-template"></script>
+    <script type="text/template" id="signup-template">
+      <div class="col-md-4 col-md-offset-4">
+        <div class="well">
+          <h1>Sign Up</h1>
+          <form action="#" id="signup">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input id="email" class="signin-field form-control" type="email" placeholder="user@example.com">
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input id="password" class="signin-field form-control" type="password">
+            </div>
+
+            <button type="submit" class="btn btn-block btn-info">Sign Up</button>
+          </form>
+        </div>
+      </div>
+    </script>
     <script src="js/models/user.js"></script>
     <script src="js/models/bomb.js"></script>
     <script src="js/collections/bombs.js"></script>

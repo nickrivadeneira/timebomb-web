@@ -6,10 +6,22 @@ TimebombRouter = Backbone.Router.extend({
     'bombs/:id': 'viewBombShow'
   },
 
-  signup: function(){console.log('signup route')},
-  signin: function(){this.signinView = new SigninView; this.signinView.render()},
-  viewBombIndex: function(){console.log('bomb index route')},
-  viewBombShow: function (id){console.log('bomb show route')}
+  signup: function(){
+    this.signupView = new SignupView;
+    this.signupView.render();
+  },
+  signin: function(){
+    this.signinView = new SigninView;
+    this.signinView.render();
+  },
+  viewBombIndex: function(){
+    this.bombIndexView = new BombsView;
+    this.bombIndexView.render();
+  },
+  viewBombShow: function (id){
+    this.bombShowView = new BombShowView;
+    this.bombShowView.render();
+  }
 })
 
 var myTimebombRouter = new TimebombRouter();
