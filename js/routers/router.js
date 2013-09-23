@@ -8,34 +8,40 @@ TimebombRouter = Backbone.Router.extend({
   },
 
   signup: function(){
-    this.signupView = new SignupView;
-    this.signupView.render();
+    if(!this.signedIn()){
+      this.signupView = new SignupView;
+      this.signupView.render();
+    }
   },
   signin: function(){
-    this.signinView = new SigninView;
-    this.signinView.render();
+    if(!this.signedIn()){
+      this.signinView = new SigninView;
+      this.signinView.render();
+    }else{
+      this.viewBombIndex();
+    }
   },
   signout: function(){
     localStorage.removeItem('token');
     this.signin();
   },
   viewBombIndex: function(){
-    if(this.authenticate()){
+    if(this.signedIn(true)){
       this.bombIndexView = new BombsView;
       this.bombIndexView.render();
     }
   },
   viewBombShow: function (id){
-    if(this.authenticate()){
+    if(this.signedIn(true)){
       this.bombShowView = new BombShowView;
       this.bombShowView.render();
     }
   },
-  authenticate: function(){
+  signedIn: function(authenticate){
     if(localStorage.token){
       return true;
     }else{
-      this.signin();
+      if(authenticate){this.signin();}
       return false;
     }
   }
