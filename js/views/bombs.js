@@ -22,7 +22,7 @@ BombsView = Backbone.View.extend({
 
   addOne: function(bomb){
     var view = new BombView({model: bomb});
-    $('#bomb-list').append(view.render().el);
+    $(view.render().el).hide().prependTo('#bomb-list').slideDown();
   },
 
   createOnSubmit: function(event){
@@ -31,13 +31,22 @@ BombsView = Backbone.View.extend({
       return;
     }
 
-    if(this.bombs.create(this.newAttributes(), {wait: true, validate: true})){
-      console.log('success');
-      this.$formInputs.each(function(formField){
-        $(formField).val('');
+    var newBomb = new Bomb(this.newAttributes());
+    if(newBomb.isValid()){
+      newBomb.save({}, {
+        success: function(){
+          appView.renderAlert('Bomb successfully created!', 'success');
+          this.$formInputs.each(function(formField){
+            $(formField).val('');
+          });
+          this.bombs.add(newBomb);
+        },
+        error: function(){
+          appView.renderAlert('Something has gone wrong.', 'danger');
+        }
       })
     }else{
-      console.log('failure');
+      appView.renderAlert(newBomb.validationError, 'danger');
     }
   },
 
