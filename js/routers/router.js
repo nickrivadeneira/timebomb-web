@@ -2,6 +2,7 @@ TimebombRouter = Backbone.Router.extend({
   routes: {
     'signup': 'signup',
     'signin': 'signin',
+    'signout': 'signout',
     'bombs': 'viewBombIndex',
     'bombs/:id': 'viewBombShow'
   },
@@ -14,13 +15,29 @@ TimebombRouter = Backbone.Router.extend({
     this.signinView = new SigninView;
     this.signinView.render();
   },
+  signout: function(){
+    localStorage.removeItem('token');
+    this.signin();
+  },
   viewBombIndex: function(){
-    this.bombIndexView = new BombsView;
-    this.bombIndexView.render();
+    if(this.authenticate()){
+      this.bombIndexView = new BombsView;
+      this.bombIndexView.render();
+    }
   },
   viewBombShow: function (id){
-    this.bombShowView = new BombShowView;
-    this.bombShowView.render();
+    if(this.authenticate()){
+      this.bombShowView = new BombShowView;
+      this.bombShowView.render();
+    }
+  },
+  authenticate: function(){
+    if(localStorage.token){
+      return true;
+    }else{
+      this.signin();
+      return false;
+    }
   }
 })
 

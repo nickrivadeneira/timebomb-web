@@ -5,9 +5,10 @@ SigninView = Backbone.View.extend({
   },
   template: _.template($('#signin-template').html()),
   signinSubmit: function(event){
+    appView.clearAlerts();
     // Return on empty sign-in fields
     if($('.signin-field').filter(function(){return this.value === "";}).length){
-      return;
+      return false;
     }
 
     var email = $('#email').val().trim();
@@ -19,8 +20,15 @@ SigninView = Backbone.View.extend({
           xhr.setRequestHeader('Authorization', 'Basic ' + Base64.encode(email + ':' + password));
         },
         success: function(data){
-          token = JSON.parse(data)[0].token;
-          console.log(token);
+          localStorage.token = JSON.parse(data)[0].token;
+          myTimebombRouter.viewBombIndex();
+        },
+        error: function(request){
+          if(request.status == 401){
+            appView.renderAlert('Invalid username/password combination.', 'danger');
+          }else{
+            appView.renderAlert('Something has gone wrong.', 'danger');
+          }
         }
       });
     }
