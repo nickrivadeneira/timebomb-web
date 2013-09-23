@@ -15,7 +15,7 @@ Bomb = Backbone.Model.extend({
     }
 
     try{
-      JSON.parse(request_params);
+      JSON.parse(attributes.request_params);
     }catch(err){
       return 'JSON is invalid.';
     }
