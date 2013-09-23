@@ -38,7 +38,6 @@ BombsView = Backbone.View.extend({
       })
     }else{
       console.log('failure');
-      console.log();
     }
   },
 
